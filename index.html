@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Encrypted | Galeria de Serviços de Pavimentação</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --primary-light: #3b82f6;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --shadow: 0 10px 30px -5px rgba(37, 99, 235, 0.12);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    }
+
+    .header-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1.1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--primary);
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    nav {
+      display: flex;
+      gap: 2.2rem;
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.25s ease;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .btn-contato {
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      color: white;
+      padding: 0.65rem 1.4rem;
+      border-radius: 10px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+    }
+
+    .btn-contato:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 5rem 1.5rem 4rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 1.2rem;
+      letter-spacing: -1px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, #2563eb, #60a5fa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.15rem;
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    /* ===== GALLERY ===== */
+    .gallery-section {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1.5rem 5rem;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2.2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .section-title h2 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .section-title p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 1.4rem;
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--card);
+      aspect-ratio: 4/3;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+      border: 1px solid var(--border);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+      display: block;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.06);
+    }
+
+    .gallery-item .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(15, 23, 42, 0.75) 0%, transparent 55%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      display: flex;
+      align-items: flex-end;
+      padding: 1.3rem;
+    }
+
+    .gallery-item:hover .overlay {
+      opacity: 1;
+    }
+
+    /* ===== LIGHTBOX ===== */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.92);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-width: 94%;
+      max-height: 88vh;
+      border-radius: 12px;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.96); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: white;
+      border: none;
+      color: var(--text);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      font-size: 1.6rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    }
+
+    .lightbox-close:hover {
+      background: var(--primary);
+      color: white;
+      transform: rotate(90deg);
+    }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: white;
+      border: none;
+      color: var(--text);
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    }
+
+    .lightbox-nav:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-50%) scale(1.08);
+    }
+
+    .lightbox-prev { left: 1.5rem; }
+    .lightbox-next { right: 1.5rem; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: white;
+      border-top: 1px solid var(--border);
+      padding: 3.5rem 1.5rem;
+      text-align: center;
+    }
+
+    footer p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    footer a:hover {
+      color: var(--primary-dark);
+    }
+
+    /* ===== RESPONSIVO ===== */
+    @media (max-width: 768px) {
+      nav { display: none; }
+      .gallery {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 0.9rem;
+      }
+      .lightbox-nav {
+        width: 42px;
+        height: 42px;
+      }
+      .lightbox-prev { left: 0.6rem; }
+      .lightbox-next { right: 0.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <div class="logo">Encrypted</div>
+      <nav>
+        <a href="#galeria">Galeria</a>
+      </nav>
+      <a href="https://wa.me/34611250708?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento%20de%20pavimentação." class="btn-contato" target="_blank">Solicitar Orçamento</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Serviços de <span>Pavimentação</span><br>de Alta Qualidade</h1>
+    <p>Confira nossa galeria completa com obras realizadas. Asfalto, concreto, revitalização e muito mais.</p>
+  </section>
+
+  <!-- GALERIA -->
+  <section class="gallery-section" id="galeria">
+    <div class="section-title">
+      <div>
+        <h2>Galeria de Obras</h2>
+        <p>Clique em qualquer foto para ampliar</p>
+      </div>
+    </div>
+
+    <div class="gallery" id="gallery">
+      <!-- Fotos inseridas via JavaScript -->
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contato">
+    <p>
+      © 2026 Encrypted — Todos os direitos reservados<br>
+      <a href="https://wa.me/34611250708?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento%20de%20pavimentação." target="_blank">WhatsApp: 34 611 250 708</a>
+    </p>
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="closeLightbox">×</button>
+    <button class="lightbox-nav lightbox-prev" id="prevBtn">‹</button>
+    <img src="" alt="Foto ampliada" id="lightboxImg">
+    <button class="lightbox-nav lightbox-next" id="nextBtn">›</button>
+  </div>
+
+  <script>
+    // ===== TODAS AS SUAS FOTOS (70 fotos) =====
+    const minhasFotos = [
+      "https://i.postimg.cc/3NvsMX4j/Whats-App-Image-2026-10-09-at-11-55-45-(2).jpg",
+      "https://i.postimg.cc/3Rp1Yn1k/Whats-App-Image-2026-10-09-at-18-25-54.jpg",
+      "https://i.postimg.cc/pX0fNwvz/Whats-App-Image-2026-10-09-at-11-57-00.jpg",
+      "https://i.postimg.cc/qBKMnYj4/Whats-App-Image-2026-08-10-at-23-16-16.jpg",
+      "https://i.postimg.cc/3RCGt69X/Whats-App-Image-2026-10-09-at-18-09-58-(1).jpg",
+      "https://i.postimg.cc/PJbj7gRq/Whats-App-Image-2026-10-09-at-11-55-45.jpg",
+      "https://i.postimg.cc/WzmvyBH1/Whats-App-Image-2026-10-09-at-11-55-45-(1).jpg",
+      "https://i.postimg.cc/8z2ZF75g/Whats-App-Image-2026-08-10-at-23-16-16-(1).jpg",
+      "https://i.postimg.cc/x1w6kXCr/Whats-App-Image-2026-08-10-at-23-16-17.jpg",
+      "https://i.postimg.cc/0yMt2Y8x/Whats-App-Image-2026-10-09-at-11-43-57.jpg",
+      "https://i.postimg.cc/rwBfdDpb/Whats-App-Image-2026-10-09-at-11-43-59.jpg",
+      "https://i.postimg.cc/qvhmMskr/Whats-App-Image-2026-10-09-at-11-43-59-(1).jpg",
+      "https://i.postimg.cc/52YPNBfk/Whats-App-Image-2026-10-09-at-11-43-59-(2).jpg",
+      "https://i.postimg.cc/Gm8MhFb7/Whats-App-Image-2026-10-09-at-11-44-01.jpg",
+      "https://i.postimg.cc/Gm8MhFbq/Whats-App-Image-2026-10-09-at-11-44-03.jpg",
+      "https://i.postimg.cc/7ZGBY3qn/Whats-App-Image-2026-10-09-at-11-47-18.jpg",
+      "https://i.postimg.cc/gkBSWSbD/Whats-App-Image-2026-10-09-at-11-47-19.jpg",
+      "https://i.postimg.cc/K8k9vPm9/Whats-App-Image-2026-10-09-at-11-47-20.jpg",
+      "https://i.postimg.cc/x1JsTv9P/Whats-App-Image-2026-10-09-at-11-47-20-(1).jpg",
+      "https://i.postimg.cc/YqynHnBb/Whats-App-Image-2026-10-09-at-11-47-21.jpg",
+      "https://i.postimg.cc/gkBSWSb4/Whats-App-Image-2026-10-09-at-11-47-21-(1).jpg",
+      "https://i.postimg.cc/dtSHYHc2/Whats-App-Image-2026-10-09-at-11-47-21-(2).jpg",
+      "https://i.postimg.cc/jdkgbgYw/Whats-App-Image-2026-10-09-at-11-47-22.jpg",
+      "https://i.postimg.cc/8PnKSKg6/Whats-App-Image-2026-10-09-at-11-47-22-(1).jpg",
+      "https://i.postimg.cc/dtSHYHcZ/Whats-App-Image-2026-10-09-at-11-47-23.jpg",
+      "https://i.postimg.cc/9FN8h8HM/Whats-App-Image-2026-10-09-at-11-47-24.jpg",
+      "https://i.postimg.cc/4NFLgLR4/Whats-App-Image-2026-10-09-at-11-47-24-(1).jpg",
+      "https://i.postimg.cc/02HWsW19/Whats-App-Image-2026-10-09-at-11-47-24-(2).jpg",
+      "https://i.postimg.cc/J4d6L6C1/Whats-App-Image-2026-10-09-at-11-48-53.jpg",
+      "https://i.postimg.cc/rFpn763w/Whats-App-Image-2026-10-09-at-11-48-53-(1).jpg",
+      "https://i.postimg.cc/ncLRN8gV/Whats-App-Image-2026-10-09-at-11-48-53-(2).jpg",
+      "https://i.postimg.cc/sD26bFqX/Whats-App-Image-2026-10-09-at-11-49-04.jpg",
+      "https://i.postimg.cc/ncLRN8gp/Whats-App-Image-2026-10-09-at-11-49-06.jpg",
+      "https://i.postimg.cc/HsLZFGR1/Whats-App-Image-2026-10-09-at-11-49-07.jpg",
+      "https://i.postimg.cc/VLNG2ypy/Whats-App-Image-2026-10-09-at-11-49-07-(1).jpg",
+      "https://i.postimg.cc/CLKP9yXT/Whats-App-Image-2026-10-09-at-11-49-07-(2).jpg",
+      "https://i.postimg.cc/VLNG2yTT/Whats-App-Image-2026-10-09-at-11-49-08.jpg",
+      "https://i.postimg.cc/KvYqCXVs/Whats-App-Image-2026-10-09-at-11-49-08-(1).jpg",
+      "https://i.postimg.cc/YqSnTcVn/Whats-App-Image-2026-10-09-at-11-49-10.jpg",
+      "https://i.postimg.cc/05nXt5tL/Whats-App-Image-2026-10-09-at-11-49-11.jpg",
+      "https://i.postimg.cc/h4sZC4yF/Whats-App-Image-2026-10-09-at-11-49-13.jpg",
+      "https://i.postimg.cc/T20Nk2kF/Whats-App-Image-2026-10-09-at-11-49-14.jpg",
+      "https://i.postimg.cc/T20Nk2kN/Whats-App-Image-2026-10-09-at-11-51-22.jpg",
+      "https://i.postimg.cc/fWCqHWH2/Whats-App-Image-2026-10-09-at-11-51-31.jpg",
+      "https://i.postimg.cc/NGDCNGN7/Whats-App-Image-2026-10-09-at-11-51-32.jpg",
+      "https://i.postimg.cc/pVCc0V0C/Whats-App-Image-2026-10-09-at-11-52-11.jpg",
+      "https://i.postimg.cc/WzNW2x41/Whats-App-Image-2026-10-09-at-12-05-05.jpg",
+      "https://i.postimg.cc/fyz2w1bX/Whats-App-Image-2026-10-09-at-12-06-27.jpg",
+      "https://i.postimg.cc/8cpK1xCF/Whats-App-Image-2026-10-09-at-18-09-58.jpg",
+      "https://i.postimg.cc/Znb7TXqw/Whats-App-Image-2026-10-09-at-18-09-59.jpg",
+      "https://i.postimg.cc/GtL7c6pK/Whats-App-Image-2026-10-09-at-18-09-59-(1).jpg",
+      "https://i.postimg.cc/MH6PWgGb/Whats-App-Image-2026-10-09-at-18-09-59-(2).jpg",
+      "https://i.postimg.cc/J0r61ShX/Whats-App-Image-2026-10-09-at-18-09-59-(3).jpg",
+      "https://i.postimg.cc/QC84XvMT/Whats-App-Image-2026-10-09-at-18-09-59-(4).jpg",
+      "https://i.postimg.cc/MH9sXtc9/Whats-App-Image-2026-10-09-at-18-10-00.jpg",
+      "https://i.postimg.cc/2y0H3Tqx/Whats-App-Image-2026-10-09-at-18-14-38.jpg",
+      "https://i.postimg.cc/fy8Hk53K/Whats-App-Image-2026-10-09-at-18-14-38-(1).jpg",
+      "https://i.postimg.cc/gjgMr4w1/Whats-App-Image-2026-10-09-at-18-15-59.jpg",
+      "https://i.postimg.cc/fy8Hk53r/Whats-App-Image-2026-10-09-at-18-15-59-(1).jpg",
+      "https://i.postimg.cc/fy8Hk53q/Whats-App-Image-2026-10-09-at-18-15-59-(2).jpg",
+      "https://i.postimg.cc/4yW8nwK8/Whats-App-Image-2026-10-09-at-18-15-59-(3).jpg",
+      "https://i.postimg.cc/sxTn1KBk/Whats-App-Image-2026-10-09-at-18-16-00.jpg",
+      "https://i.postimg.cc/wMwW3Fyd/Whats-App-Image-2026-10-09-at-18-16-01.jpg",
+      "https://i.postimg.cc/Xqs2XxGb/Whats-App-Image-2026-10-09-at-18-16-01-(1).jpg",
+      "https://i.postimg.cc/yxLfWngY/Whats-App-Image-2026-10-09-at-18-25-54-(1).jpg",
+      "https://i.postimg.cc/tJBr7DZ0/Whats-App-Image-2026-10-09-at-18-25-54-(3).jpg",
+      "https://i.postimg.cc/gcstMcM8/Whats-App-Image-2026-10-09-at-18-25-55.jpg",
+      "https://i.postimg.cc/XNL12N25/Whats-App-Image-2026-10-09-at-18-25-55-(1).jpg",
+      "https://i.postimg.cc/qBwDmBmn/Whats-App-Image-2026-10-09-at-18-25-55-(2).jpg",
+      "https://i.postimg.cc/zD72dDdb/Whats-App-Image-2026-10-09-at-18-25-55-(3).jpg"
+    ];
+
+    const gallery = document.getElementById('gallery');
+
+    minhasFotos.forEach((foto, index) => {
+      const item = document.createElement('div');
+      item.className = 'gallery-item';
+      item.dataset.index = index;
+
+      item.innerHTML = `
+        <img src="${foto}" alt="Obra de pavimentação ${index + 1}" loading="lazy">
+        <div class="overlay"></div>
+      `;
+
+      gallery.appendChild(item);
+    });
+
+    // ===== LIGHTBOX =====
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const closeBtn = document.getElementById('closeLightbox');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    let currentIndex = 0;
+    const items = document.querySelectorAll('.gallery-item');
+
+    function openLightbox(index) {
+      currentIndex = index;
+      const img = items[currentIndex].querySelector('img');
+      lightboxImg.src = img.src;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function showPrev() {
+      currentIndex = (currentIndex - 1 + items.length) % items.length;
+      openLightbox(currentIndex);
+    }
+
+    function showNext() {
+      currentIndex = (currentIndex + 1) % items.length;
+      openLightbox(currentIndex);
+    }
+
+    items.forEach((item, index) => {
+      item.addEventListener('click', () => openLightbox(index));
+    });
+
+    closeBtn.addEventListener('click', closeLightbox);
+    prevBtn.addEventListener('click', showPrev);
+    nextBtn.addEventListener('click', showNext);
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') showPrev();
+      if (e.key === 'ArrowRight') showNext();
+    });
+  </script>
+</body>
+</html>
